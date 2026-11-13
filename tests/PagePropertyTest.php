@@ -22,8 +22,7 @@ use Notion;
  */
 class PagePropertyTest extends NotionApiTest
 {
-    /** @test */
-    public function it_checks_if_specific_page_property_is_a_valid_multi_select_property()
+    public function test_checks_if_specific_page_property_is_a_valid_multi_select_property()
     {
         // successful /v1/pages/PAGE_DOES_EXIST
         Http::fake([
@@ -50,8 +49,7 @@ class PagePropertyTest extends NotionApiTest
         $this->assertSame('4e1cfee9-0acf-4cf0-ab01-121790c3eeab', $multiSelect->getItems()->first()->getId());
     }
 
-    /** @test */
-    public function it_checks_if_specific_page_property_is_a_valid_select_property()
+    public function test_checks_if_specific_page_property_is_a_valid_select_property()
     {
         // successful /v1/pages/PAGE_DOES_EXIST
         Http::fake([
@@ -78,8 +76,7 @@ class PagePropertyTest extends NotionApiTest
         $this->assertSame('e7ec0090-22c2-47d6-8035-f42af53032fb', $select->getItem()->getId());
     }
 
-    /** @test */
-    public function it_checks_if_specific_page_property_is_a_valid_text_property()
+    public function test_checks_if_specific_page_property_is_a_valid_text_property()
     {
         // successful /v1/pages/PAGE_DOES_EXIST
         Http::fake([
@@ -106,8 +103,7 @@ class PagePropertyTest extends NotionApiTest
         $this->assertCount(2, $text->getRichText()->getRawResponse());
     }
 
-    /** @test */
-    public function it_checks_if_specific_page_property_is_a_valid_number_property()
+    public function test_checks_if_specific_page_property_is_a_valid_number_property()
     {
         // successful /v1/pages/PAGE_DOES_EXIST
         Http::fake([
@@ -130,8 +126,7 @@ class PagePropertyTest extends NotionApiTest
         $this->assertSame(500.0, $number->getContent());
     }
 
-    /** @test */
-    public function it_checks_if_specific_page_property_is_a_valid_title_property()
+    public function test_checks_if_specific_page_property_is_a_valid_title_property()
     {
         // successful /v1/pages/PAGE_DOES_EXIST
         Http::fake([
