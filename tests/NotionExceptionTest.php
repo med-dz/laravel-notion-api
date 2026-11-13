@@ -10,8 +10,7 @@ use Illuminate\Support\Facades\Http;
  */
 class NotionExceptionTest extends NotionApiTest
 {
-    /** @test */
-    public function it_throws_a_notion_exception_with_detailed_message_from_response()
+    public function test_throws_a_notion_exception_with_detailed_message_from_response()
     {
         Http::fake([
             'https://api.notion.com/v1/blocks/d092140ce4e549bf9915fb8ad43d1699d/children*' => Http::response(

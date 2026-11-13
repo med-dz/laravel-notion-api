@@ -18,7 +18,6 @@ use FiveamCode\LaravelNotionApi\Entities\Blocks\ToDo;
 use FiveamCode\LaravelNotionApi\Entities\Blocks\Toggle;
 use FiveamCode\LaravelNotionApi\Entities\Blocks\Video;
 use FiveamCode\LaravelNotionApi\Entities\Collections\BlockCollection;
-use FiveamCode\LaravelNotionApi\Exceptions\HandlingException;
 use FiveamCode\LaravelNotionApi\Exceptions\NotionException;
 use Illuminate\Support\Facades\Http;
 use Notion;
@@ -32,8 +31,7 @@ use Notion;
  */
 class EndpointBlocksTest extends NotionApiTest
 {
-    /** @test */
-    public function it_throws_a_notion_exception_bad_request()
+    public function test_throws_a_notion_exception_bad_request()
     {
         // failing /v1/blocks
         Http::fake([
@@ -51,8 +49,7 @@ class EndpointBlocksTest extends NotionApiTest
         Notion::block('b55c9c91-384d-452b-81db-d1ef79372b76')->children();
     }
 
-    /** @test */
-    public function it_returns_block_collection_with_children()
+    public function test_returns_block_collection_with_children()
     {
         // successful /v1/blocks/BLOCK_DOES_EXIST/children
         Http::fake([
@@ -67,7 +64,7 @@ class EndpointBlocksTest extends NotionApiTest
         $this->assertInstanceOf(BlockCollection::class, $blockChildren);
 
         $blockChildrenCollection = $blockChildren->asCollection();
-        $this->assertContainsOnly(Block::class, $blockChildrenCollection);
+        $this->assertContainsOnlyInstancesOf(Block::class, $blockChildrenCollection);
         $this->assertIsIterable($blockChildrenCollection);
         $this->assertCount(3, $blockChildrenCollection);
 
@@ -82,8 +79,7 @@ class EndpointBlocksTest extends NotionApiTest
         $this->assertEquals('Lacinato kale', $blockChild->getRawContent()['text'][0]['plain_text']);
     }
 
-    /** @test */
-    public function it_returns_block_collection_with_children_as_correct_instances()
+    public function test_returns_block_collection_with_children_as_correct_instances()
     {
         // successful /v1/blocks/BLOCK_DOES_EXIST/children
         Http::fake([
@@ -99,7 +95,7 @@ class EndpointBlocksTest extends NotionApiTest
 
         // check collection
         $blockChildrenCollection = $blockChildren->asCollection();
-        $this->assertContainsOnly(Block::class, $blockChildrenCollection);
+        $this->assertContainsOnlyInstancesOf(Block::class, $blockChildrenCollection);
         $this->assertIsIterable($blockChildrenCollection);
         $this->assertCount(14, $blockChildrenCollection);
 
@@ -211,8 +207,7 @@ class EndpointBlocksTest extends NotionApiTest
         $this->assertEquals('quote_block', $blockChild->getContent()->getPlainText());
     }
 
-    /** @test */
-    public function it_throws_a_notion_exception_not_found()
+    public function test_throws_a_notion_exception_not_found()
     {
         // failing /v1/blocks/BLOCK_DOES_NOT_EXIST/children
         Http::fake([
@@ -230,8 +225,7 @@ class EndpointBlocksTest extends NotionApiTest
         Notion::block('b55c9c91-384d-452b-81db-d1ef79372b11')->children();
     }
 
-    /** @test */
-    public function it_returns_parent_block_in_which_new_blocks_have_been_successfully_appended()
+    public function test_returns_parent_block_in_which_new_blocks_have_been_successfully_appended()
     {
         //TODO: Change in release 0.7.0 or 0.8.0
         //!IMPORTANT: This will be changed in Notion version 2021-08-16, because a list of the newly created block children will be returned
@@ -307,39 +301,7 @@ class EndpointBlocksTest extends NotionApiTest
         $this->assertInstanceOf(Block::class, $parentBlock);
     }
 
-    /**
-     * @dataProvider classProvider
-     */
-    public function classProvider(): array
-    {
-        return [
-            [BulletedListItem::class],
-            [HeadingOne::class],
-            [HeadingTwo::class],
-            [HeadingThree::class],
-            [NumberedListItem::class],
-            [Paragraph::class],
-            [ToDo::class],
-            [Toggle::class],
-            [Quote::class],
-        ];
-    }
-
-    /**
-     * @test
-     *
-     * @dataProvider classProvider
-     *
-     * @param  $entityClass
-     */
-    public function it_throws_an_handling_exception_for_wrong_type($entityClass)
-    {
-        $this->expectException(HandlingException::class);
-        $entityClass::create(new \stdClass());
-    }
-
-    /** @test */
-    public function it_retrieves_a_single_block()
+    public function test_retrieves_a_single_block()
     {
         // successful /v1/blocks/BLOCK_DOES_EXIST
         Http::fake([
