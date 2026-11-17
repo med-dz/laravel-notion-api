@@ -24,7 +24,8 @@ find [here](https://dianawebdev.notion.site/8284f3ff77e24d4a939d19459e4d6bdc?v=b
 ## Installation
 
 The package is compatible with Laravel 8 through 13. The minimum PHP requirement is 8.0;
-Laravel 13 requires PHP 8.3 or later.
+Laravel 13 requires PHP 8.3 or later. Both Guzzle 7 and 8 are supported, subject to
+the Guzzle versions supported by your Laravel version.
 
 1. Install the package via composer:
 
