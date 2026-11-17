@@ -10,8 +10,7 @@ use PHPUnit\Framework\TestCase;
  */
 class HandlingExceptionTest extends TestCase
 {
-    /** @test */
-    public function it_returns_a_handling_exception_instance_with_payload()
+    public function test_returns_a_handling_exception_instance_with_payload()
     {
         $wrapperException = HandlingException::instance('An error occured.', ['foo' => 'bar']);
 
@@ -23,8 +22,7 @@ class HandlingExceptionTest extends TestCase
         $this->assertNotEmpty($wrapperException->getPayload());
     }
 
-    /** @test */
-    public function it_returns_a_handling_exception_instance_without_payload()
+    public function test_returns_a_handling_exception_instance_without_payload()
     {
         $wrapperException = HandlingException::instance('An error occured.');
 

@@ -17,8 +17,7 @@ use Notion;
  */
 class EndpointUsersTest extends NotionApiTest
 {
-    /** @test */
-    public function it_throws_a_notion_exception_bad_request()
+    public function test_throws_a_notion_exception_bad_request()
     {
         // failing /v1/users
         Http::fake([
@@ -36,8 +35,7 @@ class EndpointUsersTest extends NotionApiTest
         Notion::users()->all();
     }
 
-    /** @test */
-    public function it_returns_all_users_of_workspace_as_collection_with_entity_objects()
+    public function test_returns_all_users_of_workspace_as_collection_with_entity_objects()
     {
         // successful /v1/users
         Http::fake([
@@ -53,7 +51,7 @@ class EndpointUsersTest extends NotionApiTest
         $this->assertInstanceOf(UserCollection::class, $users);
 
         $userCollection = $users->asCollection();
-        $this->assertContainsOnly(User::class, $userCollection);
+        $this->assertContainsOnlyInstancesOf(User::class, $userCollection);
         $this->assertIsIterable($userCollection);
         $this->assertCount(2, $userCollection);
 
@@ -64,8 +62,7 @@ class EndpointUsersTest extends NotionApiTest
         $this->assertEquals('https://secure.notion-static.com/e6a352a8-8381-44d0-a1dc-9ed80e62b53d.jpg', $user->getAvatarUrl());
     }
 
-    /** @test */
-    public function it_returns_a_specific_user_as_entity_object()
+    public function test_returns_a_specific_user_as_entity_object()
     {
         // successful /v1/users/USER_DOES_EXITS
         Http::fake([
@@ -84,8 +81,7 @@ class EndpointUsersTest extends NotionApiTest
         $this->assertEquals('https://secure.notion-static.com/e6a352a8-8381-44d0-a1dc-9ed80e62b53d.jpg', $user->getAvatarUrl());
     }
 
-    /** @test */
-    public function it_throws_a_notion_exception_not_found()
+    public function test_throws_a_notion_exception_not_found()
     {
         // failing /v1/pages/PAGE_DOES_NOT_EXIST
         Http::fake([

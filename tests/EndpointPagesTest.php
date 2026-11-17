@@ -32,8 +32,7 @@ use Notion;
  */
 class EndpointPagesTest extends NotionApiTest
 {
-    /** @test */
-    public function it_throws_a_notion_exception_bad_request()
+    public function test_throws_a_notion_exception_bad_request()
     {
         // failing /v1
         Http::fake([
@@ -51,8 +50,7 @@ class EndpointPagesTest extends NotionApiTest
         Notion::pages()->find('afd5f6fb-1cbd-41d1-a108-a22ae0d9bac8');
     }
 
-    /** @test */
-    public function it_returns_page_entity_with_filled_properties()
+    public function test_returns_page_entity_with_filled_properties()
     {
         // successful /v1/pages/PAGE_DOES_EXIST
         Http::fake([
@@ -85,8 +83,7 @@ class EndpointPagesTest extends NotionApiTest
         $this->assertInstanceOf(Carbon::class, $pageResult->getLastEditedTime());
     }
 
-    /** @test */
-    public function it_throws_a_notion_exception_not_found()
+    public function test_throws_a_notion_exception_not_found()
     {
         // failing /v1/pages/PAGE_DOES_NOT_EXIST
         Http::fake([
@@ -104,8 +101,7 @@ class EndpointPagesTest extends NotionApiTest
         Notion::pages()->find('b55c9c91-384d-452b-81db-d1ef79372b79');
     }
 
-    /** @test */
-    public function it_assembles_properties_for_a_new_page()
+    public function test_assembles_properties_for_a_new_page()
     {
         // test values
         $pageId = '0349b883a1c64539b435289ea62b6eab';

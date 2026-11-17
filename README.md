@@ -23,7 +23,8 @@ find [here](https://dianawebdev.notion.site/8284f3ff77e24d4a939d19459e4d6bdc?v=b
 
 ## Installation
 
-The package is compatible with Laravel 8, 9 and 10. The minimum PHP requirement is 8.0.
+The package is compatible with Laravel 8 through 13. The minimum PHP requirement is 8.0;
+Laravel 13 requires PHP 8.3 or later.
 
 1. Install the package via composer:
 
@@ -157,6 +158,9 @@ If you want to run the tests in your CLI:
 ```bash
 vendor/bin/pest tests
 ```
+
+To generate an HTML coverage report in `coverage-report`, enable PCOV or Xdebug's
+coverage mode and run `composer test-coverage`.
 
 # Support
 

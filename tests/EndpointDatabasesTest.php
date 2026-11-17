@@ -18,8 +18,7 @@ use Notion;
  */
 class EndpointDatabasesTest extends NotionApiTest
 {
-    /** @test */
-    public function it_returns_a_list_of_database_objects()
+    public function test_returns_a_list_of_database_objects()
     {
         // successful /v1/databases
         Http::fake([
@@ -36,8 +35,7 @@ class EndpointDatabasesTest extends NotionApiTest
         $this->assertCount(2, $result);
     }
 
-    /** @test */
-    public function it_returns_an_empty_list()
+    public function test_returns_an_empty_list()
     {
         // successful but empty /v1/databases
         Http::fake([
@@ -55,8 +53,7 @@ class EndpointDatabasesTest extends NotionApiTest
         $this->assertCount(0, $result);
     }
 
-    /** @test */
-    public function it_throws_a_notion_exception_bad_request()
+    public function test_throws_a_notion_exception_bad_request()
     {
         // failing /v1/databases
         Http::fake([
@@ -73,8 +70,7 @@ class EndpointDatabasesTest extends NotionApiTest
         Notion::databases()->all();
     }
 
-    /** @test */
-    public function it_returns_database_entity_with_filled_properties()
+    public function test_returns_database_entity_with_filled_properties()
     {
         // successful /v1/databases/DATABASE_DOES_EXIST
         Http::fake([
@@ -110,8 +106,7 @@ class EndpointDatabasesTest extends NotionApiTest
         $this->assertEquals('f2939732-f694-4ce2-b613-f28db6ded673', $databaseResult->getParentId());
     }
 
-    /** @test */
-    public function it_throws_a_notion_exception_not_found()
+    public function test_throws_a_notion_exception_not_found()
     {
         // failing /v1/databases/DATABASE_DOES_NOT_EXIST
         Http::fake([

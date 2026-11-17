@@ -18,8 +18,7 @@ use Notion;
  */
 class EndpointSearchTest extends NotionApiTest
 {
-    /** @test */
-    public function it_throws_a_notion_exception_bad_request()
+    public function test_throws_a_notion_exception_bad_request()
     {
         // failing /v1/search
         Http::fake([
@@ -37,8 +36,7 @@ class EndpointSearchTest extends NotionApiTest
         Notion::search()->query();
     }
 
-    /** @test */
-    public function it_returns_all_pages_and_databases_of_the_workspace_as_collection_with_entity_objects()
+    public function test_returns_all_pages_and_databases_of_the_workspace_as_collection_with_entity_objects()
     {
         // successful /v1/search
         Http::fake([
@@ -62,8 +60,7 @@ class EndpointSearchTest extends NotionApiTest
         $this->assertInstanceOf(Page::class, $page);
     }
 
-    /** @test */
-    public function it_returns_only_pages_of_the_workspace_as_collection_with_entity_objects()
+    public function test_returns_only_pages_of_the_workspace_as_collection_with_entity_objects()
     {
         // successful /v1/search
         Http::fake([
@@ -85,8 +82,7 @@ class EndpointSearchTest extends NotionApiTest
         $this->assertInstanceOf(Page::class, $page);
     }
 
-    /** @test */
-    public function it_returns_only_databases_of_the_workspace_as_collection_with_entity_objects()
+    public function test_returns_only_databases_of_the_workspace_as_collection_with_entity_objects()
     {
         // successful /v1/search
         Http::fake([

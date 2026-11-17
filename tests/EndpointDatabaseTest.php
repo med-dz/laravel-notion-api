@@ -91,7 +91,7 @@ it('queries a database with filter and sorting and processes result', function (
 
     $this->assertIsIterable($resultCollection);
     $this->assertCount($limit, $resultCollection);
-    $this->assertContainsOnly(Page::class, $resultCollection);
+    $this->assertContainsOnlyInstancesOf(Page::class, $resultCollection);
 
     // check page object
     $page = $resultCollection->first();
@@ -179,7 +179,7 @@ it('queries a database with and without offset and processes result', function (
     $resultCollection = $result->asCollection();
 
     $this->assertIsIterable($resultCollection);
-    $this->assertContainsOnly(Page::class, $resultCollection);
+    $this->assertContainsOnlyInstancesOf(Page::class, $resultCollection);
 
     // check page object
     $page = $resultCollection->first();
@@ -198,7 +198,7 @@ it('queries a database with and without offset and processes result', function (
     $resultWithOffsetCollection = $resultWithOffset->asCollection();
 
     $this->assertIsIterable($resultWithOffsetCollection);
-    $this->assertContainsOnly(Page::class, $resultWithOffsetCollection);
+    $this->assertContainsOnlyInstancesOf(Page::class, $resultWithOffsetCollection);
 
     // check page object
     $page = $resultWithOffsetCollection->first();
@@ -222,7 +222,7 @@ it('queries a database with a rollup property with empty selects', function () {
     $resultCollection = $result->asCollection();
 
     $this->assertIsIterable($resultCollection);
-    $this->assertContainsOnly(Page::class, $resultCollection);
+    $this->assertContainsOnlyInstancesOf(Page::class, $resultCollection);
 
     // check page object
     $page = $resultCollection->first();
